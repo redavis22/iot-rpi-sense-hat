@@ -13,11 +13,11 @@ console.log('Starting sense-hat zeroRPC server');
 var invoke = senseHat.start();
 
 console.log('Testing sense-hat zeroRPC server');
-invoke('ping', function(err, response, more) {
-  if (err) {
-    console.error('ERROR', err);
-  } else {
-    console.log('Test success', response);
-  }
-});
+// invoke('ping', function(err, response, more) {
+//   if (err) {
+//     console.error('ERROR', err);
+//   } else {
+//     console.log('Test success', response);
+//   }
+// });
 
