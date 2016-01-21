@@ -163,16 +163,14 @@ function drawTicTacToe(state) {
         6, 6, -1, 7, 7, -1, 8, 8
     ];
 
-    console.log(grid);
-    console.log(JSON.stringify(grid));
-    // if (state.length == 9) {
-    //     sense.invoke('set_pixels', JSON.stringify(grid), function(error, res, done) {
-    //         if (error) console.error(error);
-    //         else {
+    if (state.length == 9) {
+        sense.invoke('set_pixels', JSON.stringify(grid), function(error, res, done) {
+            if (error) console.error(error);
+            else {
 
-    //         }
-    //     });
-    // } else {
-    //     console.error('The state should be 9 characters long', state);
-    // }
+            }
+        });
+    } else {
+        console.error('The state should be 9 characters long', state);
+    }
 }
