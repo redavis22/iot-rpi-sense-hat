@@ -9,7 +9,7 @@ class api(obecjt):
   def __getattr__(self, attr):
     if attr == 'ping':
       return 'pong'
-    else
+    else:
       if hasattr(sense, attr):
         def wrapper(*args, **kw):
             # print('called with %r and %r' % (args, kw))
