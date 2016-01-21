@@ -1,16 +1,19 @@
 var zerorpc = require("zerorpc");
 var spawn = require('child_process').spawn;
 
+var sensorsZeroRPC;
+var zeroRPCClient;
+
 module.exports = {
 
     start: function() {
 
-        var sensorsZeroRPC = spawn('python', ['senseHatOverZeroRPC.py']);
+        sensorsZeroRPC = spawn('python', ['senseHatOverZeroRPC.py']);
         sensorsZeroRPC.on('error', function(err) {
             console.error('ERROR', err);
         });
 
-        var zeroRPCClient = new zerorpc.Client();
+        zeroRPCClient = new zerorpc.Client();
 
         zeroRPCClient.connect('tcp://127.0.0.1:4242');
 
