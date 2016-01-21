@@ -55,7 +55,15 @@ setTimeout(getAndPublishSensorData, 2000);
 // IOT THINGSHADOW MANAGEMENT
 var thingShadow = awsIot.thingShadow(config);
 var thingState = {
-    tictactoe: '         '
+    tictactoe1: ' ',
+    tictactoe2: ' ',
+    tictactoe3: ' ',
+    tictactoe4: ' ',
+    tictactoe5: ' ',
+    tictactoe6: ' ',
+    tictactoe7: ' ',
+    tictactoe8: ' ',
+    tictactoe9: ' '
 };
 
 drawTicTacToe(thingState.tictactoe);
@@ -70,11 +78,28 @@ function updateThingShadow() {
 
 function updateThingState(newState) {
 
-    if (newState.hasOwnProperty('tictactoe')) drawTicTacToe(newState.tictactoe);
+    console.log('updated thingState to:', thingState);
+
+    if (newState.hasOwnProperty('tictactoe1') && newState.tictactoe1.length == 1 &&
+        newState.hasOwnProperty('tictactoe2') && newState.tictactoe2.length == 1 &&
+        newState.hasOwnProperty('tictactoe3') && newState.tictactoe3.length == 1 &&
+        newState.hasOwnProperty('tictactoe4') && newState.tictactoe4.length == 1 &&
+        newState.hasOwnProperty('tictactoe5') && newState.tictactoe5.length == 1 &&
+        newState.hasOwnProperty('tictactoe6') && newState.tictactoe6.length == 1 &&
+        newState.hasOwnProperty('tictactoe7') && newState.tictactoe7.length == 1 &&
+        newState.hasOwnProperty('tictactoe8') && newState.tictactoe8.length == 1 &&
+        newState.hasOwnProperty('tictactoe9') && newState.tictactoe9.length == 1
+    ) drawTicTacToe(newState.tictactoe1 +
+        newState.tictactoe2 +
+        newState.tictactoe3 +
+        newState.tictactoe4 +
+        newState.tictactoe5 +
+        newState.tictactoe6 +
+        newState.tictactoe7 +
+        newState.tictactoe8 +
+        newState.tictactoe9);
 
     _.extend(thingState, newState);
-
-    console.log('updated thingState to:', thingState);
 
     setTimeout(updateThingShadow, 0);
 }
@@ -157,11 +182,9 @@ function drawTicTacToe(state) {
 
     var gridReference = [
         0, 0, -1, 1, 1, -1, 2, 2,
-        0, 0, -1, 1, 1, -1, 2, 2,
-        -1, -1, -1, -1, -1, -1, -1, -1,
+        0, 0, -1, 1, 1, -1, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1,
         3, 3, -1, 4, 4, -1, 5, 5,
-        3, 3, -1, 4, 4, -1, 5, 5,
-        -1, -1, -1, -1, -1, -1, -1, -1,
+        3, 3, -1, 4, 4, -1, 5, 5, -1, -1, -1, -1, -1, -1, -1, -1,
         6, 6, -1, 7, 7, -1, 8, 8,
         6, 6, -1, 7, 7, -1, 8, 8
     ];
@@ -170,19 +193,19 @@ function drawTicTacToe(state) {
         console.log('Writing', state, 'to display');
         for (i = 0; i < gridReference.length; i++) {
             if (gridReference[i] != -1) {
-                switch(state.charAt(gridReference[i])) {
-                  case 'X':
-                      grid[i] = X;
-                      break;
-                  case 'O':
-                      grid[i] = O;
-                      break;
-                  case ' ':
-                      grid[i] = E;
-                      break;
-                  default:
-                      grid[i] = ERR;
-                      break;
+                switch (state.charAt(gridReference[i])) {
+                    case 'X':
+                        grid[i] = X;
+                        break;
+                    case 'O':
+                        grid[i] = O;
+                        break;
+                    case ' ':
+                        grid[i] = E;
+                        break;
+                    default:
+                        grid[i] = ERR;
+                        break;
                 }
             }
         }
