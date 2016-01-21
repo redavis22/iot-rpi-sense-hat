@@ -4,6 +4,16 @@ var spawn = require('child_process').spawn;
 var sensorsZeroRPC;
 var zeroRPCClient;
 
+var cleanExit = function() {
+  process.exit();
+};
+process.on('SIGINT', cleanExit); // catch ctrl-c
+process.on('SIGTERM', cleanExit); // catch kill
+
+process.on('exit', function() {
+  sensorsZeroRPC.kill();
+});
+
 module.exports = {
 
     start: function() {
