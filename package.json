@@ -1,0 +1,22 @@
+{
+  "name": "aws-iot-rpi-sense-hat",
+  "version": "0.0.1",
+  "description": "Awesome AWS IoT demo",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://teuteuguy@github.com/teuteuguy/aws-iot-rpi-sense-hat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teuteuguy/aws-iot-rpi-sense-hat/issues"
+  },
+  "homepage": "https://github.com/teuteuguy/aws-iot-rpi-sense-hat#readme",
+  "dependencies": {
+    "aws-iot-device-sdk": "^1.0.9",
+    "lodash": "^3.10.1",
+    "q": "^1.4.1",
+    "zerorpc": "^0.9.6"
+  }
+}
