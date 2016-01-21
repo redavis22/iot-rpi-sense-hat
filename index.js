@@ -55,15 +55,16 @@ setTimeout(getAndPublishSensorData, 2000);
 // IOT THINGSHADOW MANAGEMENT
 var thingShadow = awsIot.thingShadow(config);
 var thingState = {
-    tictactoe1: ' ',
-    tictactoe2: ' ',
-    tictactoe3: ' ',
-    tictactoe4: ' ',
-    tictactoe5: ' ',
-    tictactoe6: ' ',
-    tictactoe7: ' ',
-    tictactoe8: ' ',
-    tictactoe9: ' '
+    tictactoe: '         '
+    // tictactoe1: ' ',
+    // tictactoe2: ' ',
+    // tictactoe3: ' ',
+    // tictactoe4: ' ',
+    // tictactoe5: ' ',
+    // tictactoe6: ' ',
+    // tictactoe7: ' ',
+    // tictactoe8: ' ',
+    // tictactoe9: ' '
 };
 
 drawTicTacToe();
@@ -146,26 +147,27 @@ thingShadow.on('timeout', function(thingName, clientToken) {
 
 function drawTicTacToe() {
 
-    if (!(thingState.hasOwnProperty('tictactoe1') && thingState.tictactoe1.length == 1 &&
-            thingState.hasOwnProperty('tictactoe2') && thingState.tictactoe2.length == 1 &&
-            thingState.hasOwnProperty('tictactoe3') && thingState.tictactoe3.length == 1 &&
-            thingState.hasOwnProperty('tictactoe4') && thingState.tictactoe4.length == 1 &&
-            thingState.hasOwnProperty('tictactoe5') && thingState.tictactoe5.length == 1 &&
-            thingState.hasOwnProperty('tictactoe6') && thingState.tictactoe6.length == 1 &&
-            thingState.hasOwnProperty('tictactoe7') && thingState.tictactoe7.length == 1 &&
-            thingState.hasOwnProperty('tictactoe8') && thingState.tictactoe8.length == 1 &&
-            thingState.hasOwnProperty('tictactoe9') && thingState.tictactoe9.length == 1)) return;
+    // if (!(thingState.hasOwnProperty('tictactoe1') && thingState.tictactoe1.length == 1 &&
+    //         thingState.hasOwnProperty('tictactoe2') && thingState.tictactoe2.length == 1 &&
+    //         thingState.hasOwnProperty('tictactoe3') && thingState.tictactoe3.length == 1 &&
+    //         thingState.hasOwnProperty('tictactoe4') && thingState.tictactoe4.length == 1 &&
+    //         thingState.hasOwnProperty('tictactoe5') && thingState.tictactoe5.length == 1 &&
+    //         thingState.hasOwnProperty('tictactoe6') && thingState.tictactoe6.length == 1 &&
+    //         thingState.hasOwnProperty('tictactoe7') && thingState.tictactoe7.length == 1 &&
+    //         thingState.hasOwnProperty('tictactoe8') && thingState.tictactoe8.length == 1 &&
+    //         thingState.hasOwnProperty('tictactoe9') && thingState.tictactoe9.length == 1)) return;
 
-    var state = thingState.tictactoe1 +
-        thingState.tictactoe2 +
-        thingState.tictactoe3 +
-        thingState.tictactoe4 +
-        thingState.tictactoe5 +
-        thingState.tictactoe6 +
-        thingState.tictactoe7 +
-        thingState.tictactoe8 +
-        thingState.tictactoe9;
+    // var state = thingState.tictactoe1 +
+    //     thingState.tictactoe2 +
+    //     thingState.tictactoe3 +
+    //     thingState.tictactoe4 +
+    //     thingState.tictactoe5 +
+    //     thingState.tictactoe6 +
+    //     thingState.tictactoe7 +
+    //     thingState.tictactoe8 +
+    //     thingState.tictactoe9;
 
+    var state = thingState.tictactoe;
 
     var X = [0, 255, 0];
     var O = [0, 0, 255];
