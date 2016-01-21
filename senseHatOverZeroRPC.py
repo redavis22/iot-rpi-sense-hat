@@ -1,4 +1,5 @@
 import zerorpc
+import json
 from sense_hat import SenseHat
 sense = SenseHat()
 
@@ -6,17 +7,17 @@ sense.set_imu_config(True, True, True)
 
 class api(object):
 
-  def __getattr__(self, attr):
-    if attr == 'ping':
-      return 'pong'
-    else:
-      if hasattr(sense, attr):
-        def wrapper(*args, **kw):
-            # print('called with %r and %r' % (args, kw))
-            return getattr(sense, attr)(*args, **kw)
-        return wrapper
-      else:
-        return None
+  def ping(self):
+    return 'pong'
+
+  def get_orientation_radians(self):
+    return sense.get_orientation_radians()
+
+  def get_accelerometer_raw(self):
+    return sense.get_accelerometer_raw()
+
+  def set_pixels(self, pixel_list_json):
+    return sense.set_pixels(json.load(pixel_list_json))
 
 s = zerorpc.Server(api())
 s.bind("tcp://0.0.0.0:4242")
