@@ -194,7 +194,7 @@ function drawTicTacToe() {
     ];
 
     if (state.length == 9) {
-        console.log('Writing', state, 'to display');
+        console.log('Writing \"' + state + '\" to display');
         for (i = 0; i < gridReference.length; i++) {
             if (gridReference[i] != -1) {
                 switch (state.charAt(gridReference[i])) {
