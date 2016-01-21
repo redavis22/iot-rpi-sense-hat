@@ -1,6 +1,7 @@
 // System requires
 var os = require('os');
 var awsIot = require('aws-iot-device-sdk');
+var _ = require('lodash');
 
 // Project requires
 var config = require(__dirname + '/config.json');
