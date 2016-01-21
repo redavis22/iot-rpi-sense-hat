@@ -95,7 +95,9 @@ function updateThingState(newState) {
 
 thingShadow.on('connect', function() {
     console.log('thingShadow: connect');
-    thingShadow.register(THINGNAME);
+    thingShadow.register(THINGNAME, {
+        persistentSubscribe: true
+    });
 
     setTimeout(updateThingShadow, 1000);
 });
@@ -107,7 +109,9 @@ thingShadow.on('close', function() {
 
 thingShadow.on('reconnect', function() {
     console.log('thingShadow: reconnect');
-    thingShadow.register(THINGNAME);
+    thingShadow.register(THINGNAME, {
+        persistentSubscribe: true
+    });
 });
 
 thingShadow.on('offline', function() {
