@@ -70,7 +70,7 @@ function updateThingShadow() {
 
 function updateThingState(newState) {
 
-    if (newState.hasAttribute('tictactoe')) drawTicTacToe(newState.tictactoe);
+    if (newState.hasOwnProperty('tictactoe')) drawTicTacToe(newState.tictactoe);
 
     _.extend(thingState, newState);
 
