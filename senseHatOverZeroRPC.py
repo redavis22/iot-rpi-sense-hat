@@ -15,7 +15,7 @@ class api(obecjt):
             # print('called with %r and %r' % (args, kw))
             return getattr(sense, attr)(*args, **kw)
         return wrapper
-      else
+      else:
         return None
 
 s = zerorpc.Server(api())
