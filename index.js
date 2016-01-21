@@ -10,14 +10,21 @@ config.clientId = os.hostname();
 
 console.log('Start of app for:', config.clientId);
 console.log('Starting sense-hat zeroRPC server');
-var invoke = senseHat.start();
+var sense = senseHat.start();
 
 console.log('Testing sense-hat zeroRPC server');
-// invoke('ping', function(err, response, more) {
-//   if (err) {
-//     console.error('ERROR', err);
-//   } else {
-//     console.log('Test success', response);
-//   }
-// });
+sense.invoke('ping', function(err, response, more) {
+    if (err) {
+        console.error('ERROR', err);
+    } else {
+        console.log('Test success', response);
+    }
+});
 
+sense.invoke('get_accelerometer_raw', function(err, response, more) {
+    if (err) {
+        console.error('ERROR', err);
+    } else {
+        console.log('Test success', response);
+    }
+});
