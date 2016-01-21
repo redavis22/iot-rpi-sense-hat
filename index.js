@@ -66,7 +66,7 @@ var thingState = {
     tictactoe9: ' '
 };
 
-drawTicTacToe(thingState.tictactoe);
+drawTicTacToe();
 
 function updateThingShadow() {
     thingShadow.update(THINGNAME, {
@@ -80,26 +80,9 @@ function updateThingState(newState) {
 
     console.log('updated thingState to:', thingState);
 
-    if (newState.hasOwnProperty('tictactoe1') && newState.tictactoe1.length == 1 &&
-        newState.hasOwnProperty('tictactoe2') && newState.tictactoe2.length == 1 &&
-        newState.hasOwnProperty('tictactoe3') && newState.tictactoe3.length == 1 &&
-        newState.hasOwnProperty('tictactoe4') && newState.tictactoe4.length == 1 &&
-        newState.hasOwnProperty('tictactoe5') && newState.tictactoe5.length == 1 &&
-        newState.hasOwnProperty('tictactoe6') && newState.tictactoe6.length == 1 &&
-        newState.hasOwnProperty('tictactoe7') && newState.tictactoe7.length == 1 &&
-        newState.hasOwnProperty('tictactoe8') && newState.tictactoe8.length == 1 &&
-        newState.hasOwnProperty('tictactoe9') && newState.tictactoe9.length == 1
-    ) drawTicTacToe(newState.tictactoe1 +
-        newState.tictactoe2 +
-        newState.tictactoe3 +
-        newState.tictactoe4 +
-        newState.tictactoe5 +
-        newState.tictactoe6 +
-        newState.tictactoe7 +
-        newState.tictactoe8 +
-        newState.tictactoe9);
-
     _.extend(thingState, newState);
+
+    drawTicTacToe();
 
     setTimeout(updateThingShadow, 0);
 }
@@ -161,7 +144,28 @@ thingShadow.on('timeout', function(thingName, clientToken) {
 //    'X', 'O' or ' '
 // Total value should be 9 characters long:
 
-function drawTicTacToe(state) {
+function drawTicTacToe() {
+
+    if (!(thingState.hasOwnProperty('tictactoe1') && thingState.tictactoe1.length == 1 &&
+            thingState.hasOwnProperty('tictactoe2') && thingState.tictactoe2.length == 1 &&
+            thingState.hasOwnProperty('tictactoe3') && thingState.tictactoe3.length == 1 &&
+            thingState.hasOwnProperty('tictactoe4') && thingState.tictactoe4.length == 1 &&
+            thingState.hasOwnProperty('tictactoe5') && thingState.tictactoe5.length == 1 &&
+            thingState.hasOwnProperty('tictactoe6') && thingState.tictactoe6.length == 1 &&
+            thingState.hasOwnProperty('tictactoe7') && thingState.tictactoe7.length == 1 &&
+            thingState.hasOwnProperty('tictactoe8') && thingState.tictactoe8.length == 1 &&
+            thingState.hasOwnProperty('tictactoe9') && thingState.tictactoe9.length == 1)) return;
+
+    var state = thingState.tictactoe1 +
+        thingState.tictactoe2 +
+        thingState.tictactoe3 +
+        thingState.tictactoe4 +
+        thingState.tictactoe5 +
+        thingState.tictactoe6 +
+        thingState.tictactoe7 +
+        thingState.tictactoe8 +
+        thingState.tictactoe9;
+
 
     var X = [0, 255, 0];
     var O = [0, 0, 255];
