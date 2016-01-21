@@ -11,7 +11,6 @@ var senseHat = require(__dirname + '/senseHatOverZeroRPC.js');
 var THINGNAME = os.hostname();
 config.clientId = THINGNAME;
 
-
 console.log('Start of app for:', config.clientId);
 console.log('Starting sense-hat zeroRPC server');
 var sense = senseHat.start();
@@ -32,7 +31,49 @@ var sense = senseHat.start();
 //     }
 // });
 
-// IoT thingShadow Stuff
+
+
+// SENSORS
+var sensors = {};
+
+function getAndPublishSensorData() {
+
+  var temp = {};
+  temp.thingState = _.clone(thingState);
+  temp.device = THINGNAME;
+
+  sense.invoke('get_accelerometer_raw', function(error, res, done) {
+
+    if (error) console.error(error);
+    else {
+      temp.raw_accelerometer = res;
+
+      sense.invoke('get_orientation_radians', function(error, res, done) {
+
+        if (error) console.error(error);
+        else {
+          temp.orientation_radians = res;
+
+          thingShadow.publish(THINGNAME + '/sensors', JSON.stringify(temp), {}, function() {
+            console.log('Publish:', THINGNAME + '/sensors', temp);
+            setTimeout(getAndPublishSensorData, 0);
+          });
+        }
+
+      });
+
+    }
+
+  });
+
+}
+
+setTimeout(getAndPublishSensorData, 2000);
+
+
+
+
+// IOT THINGSHADOW MANAGEMENT
 var thingShadow = awsIot.thingShadow(config);
 var thingState = {};
 
