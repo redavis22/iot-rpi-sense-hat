@@ -15,23 +15,6 @@ console.log('Start of app for:', config.clientId);
 console.log('Starting sense-hat zeroRPC server');
 var sense = senseHat.start();
 
-// console.log('Testing sense-hat zeroRPC server');
-// sense.invoke('ping', function(err, response, more) {
-//     if (err) {
-//         console.error('ERROR', err);
-//     } else {
-//         console.log('Test success', response);
-//     }
-// });
-// sense.invoke('get_accelerometer_raw', function(err, response, more) {
-//     if (err) {
-//         console.error('ERROR', err);
-//     } else {
-//         console.log('Test success', response);
-//     }
-// });
-
-
 
 // SENSORS
 var sensors = {};
@@ -43,10 +26,10 @@ function getAndPublishSensorData() {
     temp.device = THINGNAME;
 
     sense.invoke('get_accelerometer_raw', function(error, res, done) {
-
         if (error) console.error(error);
         else {
             temp.raw_accelerometer = res;
+            temp.raw_accelerometer_magnitude = Math.abs(res.x) + Math.abs(res.y) + Math.abs(res.z);
 
             sense.invoke('get_orientation_radians', function(error, res, done) {
 
@@ -61,13 +44,9 @@ function getAndPublishSensorData() {
                 }
 
             });
-
         }
-
     });
-
 }
-
 setTimeout(getAndPublishSensorData, 2000);
 
 
