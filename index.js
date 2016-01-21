@@ -79,9 +79,8 @@ function updateThingShadow() {
 
 function updateThingState(newState) {
 
-    console.log('updated thingState to:', thingState);
-
     _.extend(thingState, newState);
+    console.log('updated thingState to:', thingState);
 
     drawTicTacToe();
 
