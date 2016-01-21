@@ -4,7 +4,7 @@ sense = SenseHat()
 
 sense.set_imu_config(True, True, True)
 
-class api(obecjt):
+class api(object):
 
   def __getattr__(self, attr):
     if attr == 'ping':
