@@ -53,7 +53,7 @@ thingShadow.on('connect', function() {
   console.log('thingShadow: connect');
   thingShadow.register(THINGNAME);
 
-  setTimeout(sendStateToAWS, 1000);
+  setTimeout(updateThingShadow, 1000);
 });
 
 thingShadow.on('close', function() {
