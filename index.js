@@ -138,9 +138,10 @@ thingShadow.on('timeout', function(thingName, clientToken) {
 
 function drawTicTacToe(state) {
 
-    var X = [255, 0, 0];
+    var X = [0, 255, 0];
     var O = [0, 0, 255];
-    var E = [0, 0, 0];
+    var ERR = [255, 0, 0];
+    var E = [0, 0, 0]; // Empty
     var W = [255, 255, 255];
 
     var grid = [
@@ -156,14 +157,35 @@ function drawTicTacToe(state) {
 
     var gridReference = [
         0, 0, -1, 1, 1, -1, 2, 2,
-        0, 0, -1, 1, 1, -1, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1,
+        0, 0, -1, 1, 1, -1, 2, 2,
+        -1, -1, -1, -1, -1, -1, -1, -1,
         3, 3, -1, 4, 4, -1, 5, 5,
-        3, 3, -1, 4, 4, -1, 5, 5, -1, -1, -1, -1, -1, -1, -1, -1,
+        3, 3, -1, 4, 4, -1, 5, 5,
+        -1, -1, -1, -1, -1, -1, -1, -1,
         6, 6, -1, 7, 7, -1, 8, 8,
         6, 6, -1, 7, 7, -1, 8, 8
     ];
 
     if (state.length == 9) {
+        console.log('Writing', state, 'to display');
+        for (i = 0; i < gridReference.length; i++) {
+            if (gridReference[i] != -1) {
+                switch(state.charAt(gridReference[i])) {
+                  case 'X':
+                      grid[i] = X;
+                      break;
+                  case 'O':
+                      grid[i] = O;
+                      break;
+                  case ' ':
+                      grid[i] = E;
+                      break;
+                  default:
+                      grid[i] = ERR;
+                      break;
+                }
+            }
+        }
         sense.invoke('set_pixels', JSON.stringify(grid), function(error, res, done) {
             if (error) console.error(error);
             else {
