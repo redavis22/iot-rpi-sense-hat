@@ -17,7 +17,7 @@ class api(object):
     return sense.get_accelerometer_raw()
 
   def set_pixels(self, pixel_list_stringified_json):
-    return sense.set_pixels(json.load(pixel_list_stringified_json))
+    return sense.set_pixels(json.loads(pixel_list_stringified_json))
 
 s = zerorpc.Server(api())
 s.bind("tcp://0.0.0.0:4242")
