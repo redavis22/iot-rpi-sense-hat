@@ -55,7 +55,7 @@ setTimeout(getAndPublishSensorData, 2000);
 // IOT THINGSHADOW MANAGEMENT
 var thingShadow = awsIot.thingShadow(config);
 var thingState = {
-  tictactoe: '         '
+    tictactoe: '         '
 };
 
 drawTicTacToe(thingState.tictactoe);
@@ -136,35 +136,33 @@ thingShadow.on('timeout', function(thingName, clientToken) {
 //    'X', 'O' or ' '
 // Total value should be 9 characters long:
 
-var X = [255, 0, 0];
-var O = [0, 0, 255];
-var E = [0, 0, 0];
-var W = [255, 255, 255];
-
-var grid = [
-    E, E, W, E, E, W, E, E,
-    E, E, W, E, E, W, E, E,
-    W, W, W, W, W, W, W, W,
-    E, E, W, E, E, W, E, E,
-    E, E, W, E, E, W, E, E,
-    W, W, W, W, W, W, W, W,
-    E, E, W, E, E, W, E, E,
-    E, E, W, E, E, W, E, E
-];
-
-var gridReference = [
-    0, 0, -1, 1, 1, -1, 2, 2,
-    0, 0, -1, 1, 1, -1, 2, 2,
-    -1, -1, -1, -1, -1, -1, -1, -1,
-    3, 3, -1, 4, 4, -1, 5, 5,
-    3, 3, -1, 4, 4, -1, 5, 5,
-    -1, -1, -1, -1, -1, -1, -1, -1,
-    6, 6, -1, 7, 7, -1, 8, 8,
-    6, 6, -1, 7, 7, -1, 8, 8
-];
-
-
 function drawTicTacToe(state) {
+
+    var X = [255, 0, 0];
+    var O = [0, 0, 255];
+    var E = [0, 0, 0];
+    var W = [255, 255, 255];
+
+    var grid = [
+        E, E, W, E, E, W, E, E,
+        E, E, W, E, E, W, E, E,
+        W, W, W, W, W, W, W, W,
+        E, E, W, E, E, W, E, E,
+        E, E, W, E, E, W, E, E,
+        W, W, W, W, W, W, W, W,
+        E, E, W, E, E, W, E, E,
+        E, E, W, E, E, W, E, E
+    ];
+
+    var gridReference = [
+        0, 0, -1, 1, 1, -1, 2, 2,
+        0, 0, -1, 1, 1, -1, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1,
+        3, 3, -1, 4, 4, -1, 5, 5,
+        3, 3, -1, 4, 4, -1, 5, 5, -1, -1, -1, -1, -1, -1, -1, -1,
+        6, 6, -1, 7, 7, -1, 8, 8,
+        6, 6, -1, 7, 7, -1, 8, 8
+    ];
+
     console.log(grid);
     console.log(JSON.stringify(grid));
     // if (state.length == 9) {
