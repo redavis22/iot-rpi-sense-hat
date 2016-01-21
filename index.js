@@ -86,7 +86,7 @@ thingShadow.on('delta', function(thingName, stateObject) {
   console.log('thingShadow: delta: thingName:', thingName);
   console.log('thingShadow: delta: stateObject:', stateObject);
 
-  if (stateOject.state) updateThingState(stateObject.state);
+  if (stateObject.state) updateThingState(stateObject.state);
 });
 
 thingShadow.on('timeout', function(thingName, clientToken) {
