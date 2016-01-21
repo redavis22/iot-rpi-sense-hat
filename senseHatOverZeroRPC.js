@@ -5,7 +5,7 @@ module.exports = {
 
     start: function() {
 
-        var sensorsZeroRPC = spawn('python', ['sensorsZeroRPC.py']);
+        var sensorsZeroRPC = spawn('python', ['senseHatOverZeroRPC.py']);
         sensorsZeroRPC.on('error', function(err) {
             console.error('ERROR', err);
         });
