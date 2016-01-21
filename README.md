@@ -4,9 +4,9 @@ This is a demo using the AWS IoT Service.
 (Awesome service by the way !).
 
 # pre-requisites
-Based off of the Jessie build for raspberry.
-Sense Hat is already installed.
-Using Raspberry Pi 2
+* Jessie build from Raspberry website
+* Raspberry Pi 2
+* Sense Hat shield
 
 First make sure everything is up-to-date:
 
@@ -16,6 +16,7 @@ First make sure everything is up-to-date:
 Second, install zerorpc (requires python-dev)
 
 	sudo apt-get install python-dev
+	sudo apt-get install libzmq3-dev
 	sudo pip install zerorpc
 	
 Third, install node on your Pi2:

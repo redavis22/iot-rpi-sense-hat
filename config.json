@@ -1,8 +1,8 @@
 {
-  keyPath: '/boot/aws/certs/private.pem',
-  certPath: '/boot/aws/certs/cert.pem',
-  caPath: '/boot/aws/certs/root-CA.pem',
-  clientId: 'unknownpi',
-  region: 'us-east-1',
-  reconnectPeriod: 5000
+  "keyPath": "/boot/aws/certs/private.pem",
+  "certPath": "/boot/aws/certs/cert.pem",
+  "caPath": "/boot/aws/certs/root-CA.pem",
+  "clientId": "unknownpi",
+  "region": "us-east-1",
+  "reconnectPeriod": 5000
 }
