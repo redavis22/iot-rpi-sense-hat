@@ -38,33 +38,33 @@ var sensors = {};
 
 function getAndPublishSensorData() {
 
-  var temp = {};
-  temp.thingState = _.clone(thingState);
-  temp.device = THINGNAME;
+    var temp = {};
+    temp.thingState = _.clone(thingState);
+    temp.device = THINGNAME;
 
-  sense.invoke('get_accelerometer_raw', function(error, res, done) {
-
-    if (error) console.error(error);
-    else {
-      temp.raw_accelerometer = res;
-
-      sense.invoke('get_orientation_radians', function(error, res, done) {
+    sense.invoke('get_accelerometer_raw', function(error, res, done) {
 
         if (error) console.error(error);
         else {
-          temp.orientation_radians = res;
+            temp.raw_accelerometer = res;
 
-          thingShadow.publish(THINGNAME + '/sensors', JSON.stringify(temp), {}, function() {
-            console.log('Publish:', THINGNAME + '/sensors', temp);
-            setTimeout(getAndPublishSensorData, 0);
-          });
+            sense.invoke('get_orientation_radians', function(error, res, done) {
+
+                if (error) console.error(error);
+                else {
+                    temp.orientation_radians = res;
+
+                    thingShadow.publish(THINGNAME + '/sensors', JSON.stringify(temp), {}, function() {
+                        // console.log('Publish:', THINGNAME + '/sensors', temp);
+                        setTimeout(getAndPublishSensorData, 0);
+                    });
+                }
+
+            });
+
         }
 
-      });
-
-    }
-
-  });
+    });
 
 }
 
@@ -78,60 +78,61 @@ var thingShadow = awsIot.thingShadow(config);
 var thingState = {};
 
 function updateThingShadow() {
-  thingShadow.update(THINGNAME, {
-    state: {
-      reported: thingState
-    }
-  });
+    thingShadow.update(THINGNAME, {
+        state: {
+            reported: thingState
+        }
+    });
 }
 
 function updateThingState(newState) {
-  _.extend(thingState, newState);
+    _.extend(thingState, newState);
 
-  updateThingShadow();
+    console.log('updated thingState to:', thingState);
+
+    setTimeout(updateThingShadow, 0);
 }
 
 thingShadow.on('connect', function() {
-  console.log('thingShadow: connect');
-  thingShadow.register(THINGNAME);
+    console.log('thingShadow: connect');
+    thingShadow.register(THINGNAME);
 
-  setTimeout(updateThingShadow, 1000);
+    setTimeout(updateThingShadow, 1000);
 });
 
 thingShadow.on('close', function() {
-  console.log('thingShadow: close');
-  thingShadow.unregister(THINGNAME);
+    console.log('thingShadow: close');
+    thingShadow.unregister(THINGNAME);
 });
 
 thingShadow.on('reconnect', function() {
-  console.log('thingShadow: reconnect');
-  thingShadow.register(THINGNAME);
+    console.log('thingShadow: reconnect');
+    thingShadow.register(THINGNAME);
 });
 
 thingShadow.on('offline', function() {
-  console.log('thingShadow: offline');
+    console.log('thingShadow: offline');
 });
 
 thingShadow.on('error', function() {
-  console.log('thingShadow: error');
+    console.log('thingShadow: error');
 });
 
 thingShadow.on('message', function(topic, message) {
-  console.log('thingShadow: message', topic, message);
+    console.log('thingShadow: message', topic, message);
 });
 
 thingShadow.on('status', function(thingName, stat, clientToken, stateObject) {
-  // too much logging console.log('thingShadow: status', thingName, stat, clientToken, stateObject);
+    // too much logging console.log('thingShadow: status', thingName, stat, clientToken, stateObject);
 });
 
 thingShadow.on('delta', function(thingName, stateObject) {
-  console.log('thingShadow: delta: thingName:', thingName);
-  console.log('thingShadow: delta: stateObject:', stateObject);
+    console.log('thingShadow: delta: thingName:', thingName);
+    console.log('thingShadow: delta: stateObject:', stateObject);
 
-  if (stateObject.state) updateThingState(stateObject.state);
+    if (stateObject.state) updateThingState(stateObject.state);
 });
 
 thingShadow.on('timeout', function(thingName, clientToken) {
-  console.log('thingShadow: timeout', thingName, clientToken);
+    console.log('thingShadow: timeout', thingName, clientToken);
 });
-
