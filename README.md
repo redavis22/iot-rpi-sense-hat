@@ -59,6 +59,23 @@ The code uses the Sense Hat to:
 
 Once a data point of acceleration/orientation is measured, it is published to '*hostname*/sensors' topic.
 
+### following needs to be setup separately at AWS level
+#### live acceleration demo
+A rule takes all orientation data and publishes it to Lambda, who then forwards it to a webpage: <http://iotsockets-prod.elasticbeanstalk.com/iotdevice>
+
+That webpage displays a 3d model that moves with the PIs orientation, with the use of websockets. Cool stuff.
+
+#### earthquate demo
+A rule in the AWS Iot Service, monitors '*hostname*/sensors' and measures the magnitude of the acceleration: abs(x) + abs(y) + abs(z).
+
+If it exceeds a threshold (I've set it to 14), (you need to shake it hard), it triggers an SNS notification.
+
+(WIP. The trigger could display a warning message on the Pi's display).
+
+#### tictactoe
+You need to code your tictactoe game algorithm somewhere and use the AWS Iot API to update the thingShadow to reflect the change.
+For my demo, I use the Amazon Echo, to play tictactoe against Alexa!
+
 You can write to the desired thingShadow the following value:
 
 ```
@@ -86,17 +103,6 @@ Where tictactoe is a 9 character string, representing the 9 potential places you
 ```
 Note that the X and O are displayed with green and blue, where red is used for incorrect character.
 
-### following needs to be setup separately at AWS level
-#### earthquate demo
-A rule in the AWS Iot Service, monitors '*hostname*/sensors' and measures the magnitude of the acceleration: abs(x) + abs(y) + abs(z).
-
-If it exceeds a threshold (I've set it to 14), (you need to shake it hard), it triggers an SNS notification.
-
-(WIP. The trigger could display a warning message on the Pi's display).
-
-#### tictactoe
-you need to code your tictactoe game algorithm somewhere and use the AWS Iot API to update the thingShadow to reflect the change.
-For my demo, I use the Amazon Echo, to play tictactoe against Alexa!
 
 # optimizations
 
