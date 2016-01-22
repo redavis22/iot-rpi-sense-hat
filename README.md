@@ -36,7 +36,7 @@ The certificates required to communicate to the AWS IoT Service are referenced i
   reconnectPeriod: 5000
 }
 
-see [/boot note](#bootnotes) about /boot
+see [note](#bootnotes) about /boot
 	
 # optimizations
 
