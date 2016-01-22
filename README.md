@@ -39,7 +39,7 @@ Fourth, use the raspberry configuration tool, to change the hostname to match wh
 # configuration
 The certificates required to communicate to the AWS IoT Service are referenced in the config.json file.
 
-```json
+```
 {
   keyPath: '/boot/aws/certs/private.pem',
   certPath: '/boot/aws/certs/cert.pem',
@@ -59,10 +59,44 @@ The code uses the Sense Hat to:
 
 Once a data point of acceleration/orientation is measured, it is published to '*hostname*/sensors' topic.
 
-### Following needs to be setup separately at AWS level
+You can write to the desired thingShadow the following value:
+
+```
+{
+	desired: {
+		tictactoe: "         "
+	}
+}
+```
+
+Where tictactoe is a 9 character string, representing the 9 potential places you can display an X, an O, or nothing.
+
+```
+"         " => Displays:   |   | 
+                         ---------
+                           |   |  
+                         ---------
+                           |   | 
+
+"X O XOO X" => Displays: X |   | O
+                         ---------
+                           | X | O
+                         ---------
+                         O |   | X
+```
+Note that the X and O are displayed with green and blue, where red is used for incorrect character.
+
+### following needs to be setup separately at AWS level
+#### earthquate demo
 A rule in the AWS Iot Service, monitors '*hostname*/sensors' and measures the magnitude of the acceleration: abs(x) + abs(y) + abs(z).
 
 If it exceeds a threshold (I've set it to 14), (you need to shake it hard), it triggers an SNS notification.
+
+(WIP. The trigger could display a warning message on the Pi's display).
+
+#### tictactoe
+you need to code your tictactoe game algorithm somewhere and use the AWS Iot API to update the thingShadow to reflect the change.
+For my demo, I use the Amazon Echo, to play tictactoe against Alexa!
 
 # optimizations
 
@@ -96,5 +130,5 @@ Finally, edit the interfaces file to change the configuraiton from /etc/wpa_supp
 	# sudo nano /etc/network/interfaces
 
 
-## <a name="bootnotes"></a> notes on /boot
+# <a name="bootnotes"></a> notes on /boot
 The /boot folder is accessible from MAC or PC by putting the PIs SD card on your computer, and thus allows you to easily change it's wifi configuration to whatever network you want.
